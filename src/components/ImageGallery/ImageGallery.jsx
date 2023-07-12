@@ -35,7 +35,6 @@ class ImageGallery extends Component {
     const { page, totalHits, data } = this.state;
 
     if (data.length >= totalHits) {
-      toast.info("We're sorry, but you've reached the end of search results.");
       return;
     }
 
@@ -79,7 +78,8 @@ class ImageGallery extends Component {
   };
 
   render() {
-    const { data, loading, loader, showModal, selectedImage } = this.state;
+    const { data, loading, loader, showModal, selectedImage, totalHits } =
+      this.state;
 
     return (
       <>
@@ -112,7 +112,7 @@ class ImageGallery extends Component {
             />
           ))}
         </ul>
-        {!loading && data.length > 0 && (
+        {!loading && data.length > 0 && data.length < totalHits && (
           <Button onClick={this.loadMoreImages} />
         )}
       </>
